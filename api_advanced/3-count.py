@@ -14,7 +14,7 @@ def count_words(subreddit, word_list, after=None, raw_counts=None):
 
     url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
     headers = {
-        "User-Agent": "linux:0x16.api.advanced:v1.0.0 (by /u/kingsley)"
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
     }
     params = {"limit": 100, "after": after}
 

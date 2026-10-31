@@ -8,12 +8,12 @@ def number_of_subscribers(subreddit):
 
     If the subreddit is invalid, returns 0.
     """
-    if not subreddit or not isinstance(subreddit, str):
+    if subreddit is None or not isinstance(subreddit, str):
         return 0
 
     url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
     headers = {
-        "User-Agent": "linux:0x16.api.advanced:v1.0.0 (by /u/kingsley)"
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
     }
 
     try:

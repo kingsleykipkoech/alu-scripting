@@ -3,20 +3,20 @@
 import requests
 
 
-def recurse(subreddit, hot_list=None, after=None):
+def recurse(subreddit, hot_list=[], after=None):
     """Recursively queries the Reddit API and returns a list of all hot titles.
 
     If the subreddit is invalid, returns None.
     """
-    if hot_list is None:
-        hot_list = []
-
-    if not subreddit or not isinstance(subreddit, str):
+    if subreddit is None or not isinstance(subreddit, str):
         return None
+
+    if after is None:
+        hot_list = []
 
     url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
     headers = {
-        "User-Agent": "linux:0x16.api.advanced:v1.0.0 (by /u/kingsley)"
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
     }
     params = {"limit": 100, "after": after}
 
@@ -30,6 +30,8 @@ def recurse(subreddit, hot_list=None, after=None):
         data = response.json().get("data", {})
         after = data.get("after")
         children = data.get("children", [])
+        if not children and not hot_list:
+            return None
 
         for child in children:
             hot_list.append(child.get("data", {}).get("title"))
